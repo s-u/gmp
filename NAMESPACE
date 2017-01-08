@@ -16,7 +16,8 @@ export(
        ## "as.character.bigq", "as.character.bigz",
        ## "as.double.bigq", "as.double.bigz",
        ## "as.matrix.bigq", "as.matrix.bigz",
-       ## "as.vector.bigq", "as.vector.bigz",
+       ## this should be a deprecated use:
+       "as.vector.bigq", "as.vector.bigz",
        ## "c.bigq", "c.bigz", "cbind.bigq", "cbind.bigz",  "rbind.bigq", "rbind.bigz",
        ## "cumsum.bigq", "cumsum.bigz",
        "denominator", "denominator<-",
@@ -216,6 +217,9 @@ S3method(gamma,bigz)
 
 S3method(cumsum,bigz)
 S3method(cumsum,bigq)
+
+S3method(prod,bigz)
+S3method(prod,bigq)
 
 ##-- end{'Math'}-------------------
 

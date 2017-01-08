@@ -1,4 +1,5 @@
-							-*-org-*-
+
+* Remove full path in configure script, with example of Rmpfr configure.						-*-org-*-
 * Bug Fixes
 ** TODO Not working column assignment :  A[,j] <- vec    does nothing, not warn, nothing -- but  A[i,] <- val  works ??
 ** TODO asNumeric(x) : the generic must get a "..." argument, so can use "rounding mode" in Rmpfr
