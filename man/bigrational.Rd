@@ -62,8 +62,6 @@ numerator(x)
   corresponding rationals bigq.
 }
 
-\references{\url{http://mulcyber.toulouse.inra.fr/projects/gmp/}}
-
 \author{Antoine Lucas}
 
 \examples{
