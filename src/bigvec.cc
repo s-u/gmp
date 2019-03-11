@@ -300,53 +300,6 @@ bool operator!=(const bigvec & rhs, const bigvec& lhs)
 
 
 
-//
-// \brief substract lambda[0] * line j to line i
-//
-void bigvec::subLine(unsigned int i,unsigned int j,const bigvec & lambda)
-{
-  if(nrow <= 0)
-    error(_("Need matrix with at least one row to do this operation"));
-
-  unsigned int k, n = value.size() / (unsigned int) nrow;
-  if(modulus.size() != 1)
-    {
-      for(k=0; k < n; ++k)
-	value[i + k*nrow] =  value[i + k*nrow] - ( value[j + k*nrow] * lambda.value[0] ) ;
-    }
-  else
-     for(k=0; k < n ; ++k)
-       {
-	 value[i + k*nrow] =  value[i + k*nrow] - ( value[j + k*nrow] * lambda.value[0] ) ;
-	 value[i + k*nrow] =  value[i + k*nrow] % modulus[0];
-       }
-}
-
-/*
- * \brief multiply line i by lambda
- */
-void bigvec::mulLine(unsigned int i,const bigvec & lambda)
-{
-  if(nrow <= 0)
-    error(_("Need matrix with at least one row to do this operation"));
-
-  unsigned int k;
-  // n number of columns
-  unsigned int n = value.size() / (unsigned int) nrow;
-  if(modulus.size() != 1)
-    {
-      for(k=0; k < n; ++k)
-	value[i + k*nrow] =  value[i + k*nrow]  * lambda.value[0]  ;
-    }
-  else
-     for(k=0; k < n ; ++k)
-       {
-	 value[i + k*nrow] =  value[i + k*nrow] * lambda.value [0] ;
-	 value[i + k*nrow] =  value[i + k*nrow] % modulus[0];
-       }
-}
-
-
 // never used
 void bigvec::print()
 {

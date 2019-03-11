@@ -119,17 +119,6 @@ class bigvec : public matrix::Matrix<bigmod> {
    */
   bigvec & operator= (const bigvec & rhs);
 
-
-  /**
-   * \brief substract lambda * line j to line i
-   */
-  void subLine(unsigned int i,unsigned int j,const bigvec & lambda);
-
-  /**
-   * \brief multiply line i by lambda
-   */
-  void mulLine(unsigned int i,const bigvec & lambda);
-
   /** \brief print matrix to stdout
    *
    * use for debug purpose

@@ -42,15 +42,10 @@ bigmod & bigmod::operator= (const bigmod& rhs)
   return(*this);
 }
 
-bigmod & bigmod::inv () 
+bigmod bigmod::inv () const
 {
-  if (inverse != NULL){
-    inverse = NULL;
-    delete inverse;
-  }
   if(value.isNA() || modulus.isNA()) {
-    inverse = new DefaultBigMod();
-    return *inverse;
+    return bigmod();
   }
     
   mpz_t val;
@@ -61,11 +56,10 @@ bigmod & bigmod::inv ()
     if(wOpt != R_NilValue && Rf_asInteger(wOpt))
       warning(_("inv(x) returning NA as x has no inverse"));
     
-    inverse = new DefaultBigMod();
-    return *inverse; // return NA; was
+    return bigmod(); // return NA; was
   }
-  inverse = new DefaultBigMod(val, modulus );
-  return *inverse;
+
+  return bigmod(val, modulus);
 }
 
 

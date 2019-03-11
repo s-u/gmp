@@ -36,14 +36,10 @@ extern "C" {
  */
 class bigmod {
  private:
-  bigmod * inverse;
-  
-  /** \brief copy operator  */
-  bigmod(const bigmod & rhs) : 
-  value(((bigmod)rhs).getValue()),modulus(((bigmod)rhs).getModulus()) {
-
-  }
-
+  /** optional source */
+  biginteger * value_ptr;
+  biginteger * modulus_ptr;
+ 
  protected:
   /** \brief  Value of our bigmod -- only references*/
   biginteger & value;
@@ -51,13 +47,55 @@ class bigmod {
   biginteger & modulus;
  
  public:
+
+  /** keep both references value / modulus
+   */
   bigmod(biginteger& value_,
 	 biginteger& modulus_)  :
-    inverse(NULL),
+    value_ptr(NULL),
+    modulus_ptr(NULL),
     value(value_),modulus(modulus_) {};
 
+ /** keep references value / modulus is new object.
+   */
+ bigmod(biginteger& value_)  :
+   value_ptr(NULL),
+   modulus_ptr(new biginteger()),
+   value(value_),modulus(*modulus_ptr) {};
+
+
+  /**
+   * create 2 new objects valus / modulus.
+   */
+ bigmod(const biginteger& value_,
+	 const biginteger& modulus_)  :
+   value_ptr(new biginteger(value_)),
+   modulus_ptr(new biginteger(modulus_)),
+   value(*value_ptr),modulus(*modulus_ptr) {};
+
+ bigmod(const biginteger& value_)  :
+   value_ptr(new biginteger(value_)),
+   modulus_ptr(new biginteger()),
+   value(*value_ptr),modulus(*modulus_ptr) {};
+
+
+ bigmod()  :
+   value_ptr(new biginteger()),
+   modulus_ptr(new biginteger()),
+   value(*value_ptr),modulus(*modulus_ptr) {};
+
+ 
+  /** \brief copy operator  */
+  bigmod(const bigmod & rhs) : 
+    value_ptr(new biginteger(rhs.getValue())),
+    modulus_ptr(new biginteger(rhs.getModulus())),
+   value(*value_ptr),modulus(*modulus_ptr) {
+  };
+
+
   virtual ~bigmod(){
-    if(inverse != NULL) delete inverse;
+    if(value_ptr != NULL) delete value_ptr;
+    if(modulus_ptr != NULL) delete modulus_ptr;
   };
 
   /**
@@ -75,7 +113,7 @@ class bigmod {
       return(mpz_sgn(getValue().getValueTemp()));
     }
 
-  bigmod & inv () ;
+  bigmod  inv () const;
 
  
   biginteger & getValue() {

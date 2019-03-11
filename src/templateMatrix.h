@@ -76,7 +76,7 @@ namespace matrix{
      */
     void mulLine(unsigned int i,const T & lambda){
       for(int k=0; k < nCols(); ++k)
-	set(i , k) =  get(i,k)  * lambda  ;
+	set(i , k,  get(i,k)  * lambda  );
     }
     
     Matrix & transpose();
@@ -93,15 +93,15 @@ namespace matrix{
 	: source(source_p) {
       };
 
-      unsigned int size(){
+      unsigned int size() const{
 	return source.size();
       }
 
-      unsigned int nRows(){
+      unsigned int nRows() const {
 	return source.nCols();
       }
 
-      T & get(unsigned int i, unsigned int j) const{
+      T & get(unsigned int i, unsigned int j) {
 	return source.get(j,i);
       }
 
