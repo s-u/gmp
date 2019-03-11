@@ -50,7 +50,7 @@ namespace solve_gmp_R
    * solve A X = B  (return X) with A & B matrix (of rational or biginteger)
    *
    * A is of dimension nxn X nxm and B nxm (X will be return a B address)
-   * We use the Gauss trucmuch algorithm
+   * We use the Gauss algorithm
    */
   template< class T> void solve (T & A , T & B)
     {
