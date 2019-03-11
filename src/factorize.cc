@@ -65,9 +65,11 @@ factor_using_division (mpz_t t, bigvec & factors)
     {
       if (! mpz_divisible_ui_p (t, p))
 	{
-	  p += primes_diff[i++];
-	  if (mpz_cmp_ui (t, p * p) < 0)
-	    break;
+	  if (i < PRIMES_PTAB_ENTRIES) {
+	    p += primes_diff[i++];
+	    if (mpz_cmp_ui (t, p * p) < 0)
+	      break;
+	  } else break;
 	}
       else
 	{
