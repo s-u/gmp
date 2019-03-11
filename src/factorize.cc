@@ -155,7 +155,7 @@ mp_prime_p (mpz_t n)
 	  is_prime = 1;
 	  for (unsigned int i = 0; i < factors.size() && is_prime; i++)
 	    {
-	      mpz_divexact (tmp, nm1, factors[i].value.getValue());
+	      mpz_divexact (tmp, nm1, factors[i].getValue().getValue());
 	      mpz_powm (tmp, a, tmp, n);
 	      is_prime = mpz_cmp_ui (tmp, 1) != 0;
 	    }
