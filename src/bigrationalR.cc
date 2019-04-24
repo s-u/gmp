@@ -139,7 +139,7 @@ namespace bigrationalR
     return v;
   }
 
-  SEXP create_SEXP(const bigvec_q & v)
+  SEXP create_SEXP(const math::Matrix<bigrational> & v)
   {
 
     SEXP ans, R_denom;
@@ -159,7 +159,7 @@ namespace bigrationalR
 
     for (i = 0; i < v.size(); ++i)
       {
-	if(v.value[i].isNA())
+	if(v[i].isNA())
 	  {
 	    sizenum += sizeof(int);
 	    sizedenum += sizeof(int);
@@ -168,8 +168,8 @@ namespace bigrationalR
 	  {
 	    // *num = mpq_numref(v.value[i].getValueTemp());
 	    // *den = mpq_denref(v.value[i].getValueTemp());
-	    mpq_get_num(num,v.value[i].getValueTemp());
-	    mpq_get_den(den,v.value[i].getValueTemp());
+	    mpq_get_num(num,v[i].getValueTemp());
+	    mpq_get_den(den,v[i].getValueTemp());
 
 	    sizenum += sizeof(int) * (2 + (mpz_sizeinbase(num,2)+numb-1) / numb); // adding each bigint's needed size
 	    sizedenum += sizeof(int) * (2 + (mpz_sizeinbase(den,2)+numb-1) / numb);
@@ -184,10 +184,10 @@ namespace bigrationalR
     int posdenum = sizeof(int); // current position in r[] (starting after vector-size-header)
     for (i = 0; i < v.size(); ++i)
       {
-	mpq_get_num(num,v.value[i].getValueTemp());
-	mpq_get_den(den,v.value[i].getValueTemp());
-	posnum += as_raw(&r[posnum],num,v.value[i].isNA());
-	posdenum += as_raw(&rdenom[posdenum],den,v.value[i].isNA());
+	mpq_get_num(num,v[i].getValueTemp());
+	mpq_get_den(den,v[i].getValueTemp());
+	posnum += as_raw(&r[posnum],num,v[i].isNA());
+	posdenum += as_raw(&rdenom[posdenum],den,v[i].isNA());
       }
 
     // set the class attribute to "bigrational"
@@ -195,8 +195,8 @@ namespace bigrationalR
     Rf_setAttrib(ans, Rf_mkString("denominator"), R_denom);
 
     // set the dim attribute to "bigq"
-    if(v.nrow >= 0)
-      Rf_setAttrib(ans, Rf_mkString("nrow"), Rf_ScalarInteger((int) v.nrow));
+    if(! v.isVector())
+      Rf_setAttrib(ans, Rf_mkString("nrow"), Rf_ScalarInteger((int) v.nRows()));
 
     UNPROTECT(2);
     return ans;
