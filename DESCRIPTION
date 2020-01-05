@@ -1,6 +1,6 @@
 Package: gmp
 Version: 0.5-13.6
-Date: 2019-04-23
+Date: 2020-01-05
 Title: Multiple Precision Arithmetic
 Author: Antoine Lucas, Immanuel Scholz, Rainer Boehme <rb-gmp@reflex-studio.de>,
   Sylvain Jasson <jasson@toulouse.inra.fr>,
@@ -17,6 +17,6 @@ License: GPL
 BuildResaveData: no
 LazyDataNote: not available, as we use data/*.R *and* our classes
 NeedsCompilation: yes
-Packaged: 2019-04-23 15:12:38 UTC; l0413674
+Packaged: 2020-01-05 18:36:28 UTC; antoine
 Repository: CRAN
-Date/Publication: 2018-07-14 14:19:11 UTC
+Date/Publication: 2019-03-11 16:00:02 UTC
