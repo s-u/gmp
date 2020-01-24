@@ -120,11 +120,10 @@ namespace bigrationalR
     if (TYPEOF(dimAttr) == INTSXP)
       v.nrow = INTEGER(dimAttr)[0];
     else {
-	// catch to get std matrix dimensions value
-      dimKey = Rf_mkString("dim");
-	dimAttr = Rf_getAttrib(param,dimKey );
-	v.nrow = (TYPEOF(dimAttr) == INTSXP) ? INTEGER(dimAttr)[0] : -1;
-      }
+      // catch to get std matrix dimensions value
+      dimAttr = Rf_getAttrib(param,R_DimSymbol );
+      v.nrow = (TYPEOF(dimAttr) == INTSXP) ? INTEGER(dimAttr)[0] : -1;
+    }
     if (TYPEOF(denAttr) != NILSXP)
       {
 	bigvec_q attrib = bigrationalR::create_vector(denAttr);
