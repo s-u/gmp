@@ -18,28 +18,62 @@ setGeneric("asNumeric", useAsDefault = function(x) {
 #
 #----------------------------------------------------------
 
-"+.bigz" <- add.bigz <- function(e1, e2) .Call(biginteger_add, e1, e2)
+"+.bigz" <- add.bigz <- function(e1, e2) {
+    if(inherits(e2, "bigq"))
+        .Call(bigrational_add, e1, e2)
+    else .Call(biginteger_add, e1, e2)
+}
 
 "-.bigz" <- sub.bigz <- function(e1, e2=NULL)
 {
     if(is.null(e2))
       .Call(biginteger_sub, 0, e1)
-    else
-      .Call(biginteger_sub, e1, e2)
+    else if(inherits(e2, "bigq"))
+        .Call(bigrational_sub, e1, e2)
+    else .Call(biginteger_sub, e1, e2)
 }
 
-"*.bigz" <- mul.bigz <- function(e1, e2) .Call(biginteger_mul, e1, e2)
+"*.bigz" <- mul.bigz <- function(e1, e2) {
+    if(inherits(e2, "bigq"))
+        .Call(bigrational_mul, e1, e2)
+    else .Call(biginteger_mul, e1, e2)
+}
 
 ## divq : integer division
-"%/%.bigz" <- divq.bigz <- function(e1, e2) .Call(biginteger_divq, e1, e2)
+"%/%.bigz" <- divq.bigz <- function(e1, e2) {
+   if(inherits(e2, "bigq")) {
+       if(is.whole(e2))
+           e2 <- as.bigz(e2)
+       else
+           stop("In 'n %/% d', d must be integer")
+   }
+   .Call(biginteger_divq, e1, e2)
+}
 
 ## div : division of integers -> either rational or (mod) integer division
-"/.bigz" <- div.bigz <- function(e1, e2) .Call(biginteger_div, e1, e2)
+"/.bigz" <- div.bigz <- function(e1, e2) {
+    if(inherits(e2, "bigq"))
+        .Call(bigrational_div, e1, e2)
+    else .Call(biginteger_div, e1, e2)
+}
 
-"%%.bigz" <- mod.bigz <- function(e1, e2) .Call(biginteger_mod,e1, e2)
+"%%.bigz" <- mod.bigz <- function(e1, e2) {
+   if(inherits(e2, "bigq")) {
+       if(is.whole(e2))
+           e2 <- as.bigz(e2)
+       else
+           stop("In 'n %% d', d must be integer")
+   }
+   .Call(biginteger_mod, e1, e2)
+}
 
-"^.bigz" <- pow.bigz <- function(e1, e2,...) .Call(biginteger_pow,e1, e2)
+"^.bigz" <- pow.bigz <- function(e1, e2,...) {
+    if(inherits(e2, "bigq"))
+        pow.bigq(e1, e2)
+    else .Call(biginteger_pow, e1, e2)
+}
 
+##' Inverse:  inv(a,b) := (1 / a) (modulo b)
 inv.bigz <- function(a,b,...) .Call(biginteger_inv,a,b)
 
 gcd <- function(a,b)
