@@ -200,8 +200,14 @@ sign.bigz <- function(x) .Call(biginteger_sgn,x)
 floor.bigz <- ceiling.bigz <- function(x) x
 trunc.bigz <- function(x, ...) x
 round.bigz <- function(x, digits=0) {
-    if(digits == 0) x
-    else stop("digits != 0  is not yet implemented")
+    ## round(x * 10^d) / 10^d
+    stopifnot(length(digits) == 1L)
+    if(digits >= 0)
+        x
+    else { # digits < 0
+        p10 <- as.bigz(10) ^ -digits # still bigz
+        round(x / p10) * p10
+    }
 }
 
 gamma.bigz <- function(x) factorialZ(x-1)
@@ -231,12 +237,19 @@ log10.bigz <- function(x) ln.bigz(x) / log(10)
 
 max.bigz <- function(...,na.rm=FALSE)
 {
- .Call(biginteger_max, c.bigz(...), na.rm)
+    X <- c.bigz(...)
+    if(inherits(X, "bigq"))
+        .Call(bigrational_max, X, na.rm)
+    else .Call(biginteger_max, X, na.rm)
+
 }
 
 min.bigz <- function(...,na.rm=FALSE)
 {
- .Call(biginteger_min, c.bigz(...), na.rm)
+    X <- c.bigz(...)
+    if(inherits(X, "bigq"))
+        .Call(bigrational_min, X, na.rm)
+    else .Call(biginteger_min, X, na.rm)
 }
 
 ## range(): works automatically via  range.default() and the above min(), max()
@@ -244,13 +257,17 @@ min.bigz <- function(...,na.rm=FALSE)
 prod.bigz <- function(..., na.rm = FALSE)
 {
     X <- c.bigz(...)
-   .Call(biginteger_prod, if(na.rm) X[!is.na(X)] else X)
+    if(inherits(X, "bigq"))
+        .Call(bigrational_prod, if(na.rm) X[!is.na(X)] else X)
+    else .Call(biginteger_prod, if(na.rm) X[!is.na(X)] else X)
 }
 
 sum.bigz <- function(..., na.rm = FALSE)
 {
     X <- c.bigz(...)
-    .Call(biginteger_sum, if(na.rm) X[!is.na(X)] else X)
+    if(inherits(X, "bigq"))
+        .Call(bigrational_sum, if(na.rm) X[!is.na(X)] else X)
+    else .Call(biginteger_sum, if(na.rm) X[!is.na(X)] else X)
 }
 ##------------end{Summary group}------------------------------------
 
@@ -260,7 +277,10 @@ setMethod("which.min", "bigz", function(x) which.max(x == min(x)))
 
 c.bigz <- function(..., recursive = FALSE)
 {
-    .Call(biginteger_c, list(...))
+    argL <- list(...)
+    if(any(vapply(argL, inherits, NA, what="bigq")))
+        .Call(bigrational_c, argL)
+    else .Call(biginteger_c, argL)
 }
 
 ## This is practically identical to  grid :: rep.unit :
