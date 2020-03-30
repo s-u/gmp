@@ -2,6 +2,7 @@
 * Remove full path in configure script, with example of Rmpfr configure.						-*-org-*-
 * Bug Fixes
 ** TODO Not working column assignment :  A[,j] <- vec    does nothing, not warn, nothing -- but  A[i,] <- val  works ??
+** TODO m <- matrix(1:6, 2); Z <- as.bigz(m); str(Z) fails because e.g. Z[5] fails, contrary m[5]
 ** TODO asNumeric(x) : the generic must get a "..." argument, so can use "rounding mode" in Rmpfr
 ** DONE URGENT / BAD : Segfaults, Wrong Results, etc
 ** TODO completely *wrong* pmin() and pmax(<bigq>, <number>): uses Numerator in comparison ???
@@ -9,7 +10,6 @@
 ** TODO Not working  Arithmetic
 *** DONE as.bigz(1:4) + as.bigq(7) failed, so do '*', '/', ... Fixed, using the +.bigz, etc _S3_ methods
 *** TODO bigq  %% and %/%  are not even defined (but are for 'numeric')!
-
 *** DONE more checking: q <- 2.3; Fn <- gmp:::`^.bigq`;  Fn(q,q) silently gave wrong result; now a good error message
 *** DONE <bigz> %*% <bigq>  silently gave wrong result; now works, as does crossprod(), tcrossprod()
 *** DONE bigz %% and %/% should be R compatible, notably fulfilling
