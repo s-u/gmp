@@ -1,5 +1,7 @@
 2020-03-30  Martin Maechler  <maechler@stat.math.ethz.ch>
 
+	* R/matrixz.R[.dimZQ, .ncolZQ]: use `%/%` to get integer dim() and ncol()
+
 	* R/matrix-prods.R: must crossprod() / tcrossprod() generics with
 	the `...` extra argument, compatibly with "R base"  `implicitGeneric("crossprod")`
 
