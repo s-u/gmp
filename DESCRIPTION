@@ -1,9 +1,9 @@
 Package: gmp
 Version: 0.5-14
-Date: 2020-03-02
+Date: 2020-05-08
 Title: Multiple Precision Arithmetic
 Author: Antoine Lucas, Immanuel Scholz, Rainer Boehme <rb-gmp@reflex-studio.de>,
-  Sylvain Jasson <jasson@toulouse.inra.fr>,
+  Sylvain Jasson <Sylvain.Jasson@inrae.fr>,
   Martin Maechler <maechler@stat.math.ethz.ch>
 Maintainer: Antoine Lucas <antoinelucas@gmail.com>
 Description: Multiple Precision Arithmetic (big integers and rationals,
@@ -17,3 +17,4 @@ License: GPL
 BuildResaveData: no
 LazyDataNote: not available, as we use data/*.R *and* our classes
 NeedsCompilation: yes
+URL: https://forgemia.inra.fr/sylvain.jasson/gmp
