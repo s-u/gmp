@@ -203,3 +203,14 @@ if(FALSE) { ## FIXME:  pmin() / pmax() are completely wrong for "bigq" !!
 } else
     message("{Rmpfr + gmp} checks __not__ done")
 
+##--------------------------- order(), sort.list() --------------------------
+x <- as.bigz("0x123456789abcdef") # my secret message
+B <- x + as.bigz(2)^(110:100)
+(dB <- diff(B)) # now works
+stopifnot(dB < 0,
+          log2(-dB) == 109:100 # 2^{n+1} - 2^n == 2^n
+)
+rev(B) # is sorted
+is.unsorted(rev(B))# TRUE but should be FALSE
+if(FALSE) ## not yet
+    identical(sort(B), rev(B))
