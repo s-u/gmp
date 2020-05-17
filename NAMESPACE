@@ -230,6 +230,9 @@ S3method(solve,bigz)
 S3method(t,bigq)
 S3method(t,bigz)
 
+S3method(diff, bigz, .diff.big)
+S3method(diff, bigq, .diff.big)
+
 ## S4 generic .. also imported in Rmpfr
 export(asNumeric)
 exportMethods(asNumeric)
