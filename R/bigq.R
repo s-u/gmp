@@ -5,7 +5,7 @@
 #
 #  Brief         : Stub to call the dll functions
 #
-#  Licence       : GPL
+#  Licence       : GPL (>= 2)
 #
 #----------------------------------------------------------
 

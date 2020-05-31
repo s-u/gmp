@@ -14,7 +14,7 @@ setGeneric("asNumeric", useAsDefault = function(x) {
 #
 #  Brief         : Stub to call the dll functions
 #
-#  Licence       : GPL
+#  Licence       : GPL (>= 2)
 #
 #----------------------------------------------------------
 
