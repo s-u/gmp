@@ -72,6 +72,7 @@ mx <- as.matrix(x) ## used to "bomb" badly:
 ## (terminate called after throwing an instance of 'std::bad_alloc')
 lx <- as.list(x)
 stopifnot(5*x == (5*i) %% 3,
+          identical(as.bigz(x), x), # was not the case in gmp 0.5-14
 	  identical(mx, as.array(x)),
 	  is(mx, "bigz"), dim(mx) == c(9,1),
 	  is.list(lx),
