@@ -23,6 +23,7 @@ export(
        "denominator", "denominator<-",
        ## "dim<-.bigq", "dim.bigq", "dim<-.bigz", "dim.bigz",
        "div.bigq", "div.bigz", "divq.bigz",
+       BernoulliQ, # Rmpfr has 'Bernoulli'; want different name
        "Eulerian", "Eulerian.all",
        "Stirling1", "Stirling1.all", "Stirling2", "Stirling2.all",
        "factorize",

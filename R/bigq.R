@@ -138,7 +138,7 @@ as.bigz.bigq <- function(a, mod = NA)
 {
   ## "FIXME":  considerably faster in C / C++
   if(any(ina <- is.na.bigq(a))) {
-    r <- as.bigz(rep.int(NA, length(a)))
+    r <- rep.bigz(NA_bigz_, length(a))
     if(any(ii <- !ina)) {
 	a <- a[ii]
 	r[ii] <- as.bigz(numerator(a) %/% denominator(a), mod[ii])

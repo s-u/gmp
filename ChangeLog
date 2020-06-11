@@ -1,3 +1,10 @@
+2020-06-09  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* DESCRIPTION (Version): 0.6-1
+
+	* R/Stirling-n-etc.R (BernoulliQ): Bernoulli numbers as exact fractions.
+	* R/zzz.R (NA_bigz_, NA_bigq_): analogous to `NA_integer_` etc
+
 2020-06-06  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* NAMESPACE: use *same* S3method(<op>, <class>, <method_fn>) for bigz and bigq,
