@@ -1,4 +1,5 @@
 \name{bigq}
+\title{Large sized rationals}
 \alias{bigq}
 \alias{bigq-class}
 \alias{as.bigq}
@@ -7,18 +8,17 @@
 \alias{as.double.bigq}
 \alias{print.bigq}
 \alias{is.na.bigq}
+\alias{NA_bigq_}
 \alias{as.bigz.bigq}
 \alias{denominator}
 \alias{denominator<-}
 \alias{numerator}
 \alias{numerator<-}
-\title{Large sized rationals}
 \description{
   Class \code{"bigq"} encodes rationals encoded as ratios of arbitrary
   large integers (via GMP).
   A simple S3 class (internally a \code{\link{raw}} vector), it has been
   registered as formal (S4) class (via \code{\link{setOldClass}}), too.
-
 }
 \usage{
 as.bigq(n, d = 1)
@@ -30,6 +30,7 @@ is.bigq(x)
 \S3method{print}{bigq}(x, quote=FALSE, initLine = TRUE, ...)
 denominator(x)
 numerator(x)
+NA_bigq_
 }
 
 \arguments{
@@ -60,6 +61,8 @@ numerator(x)
 \details{
   \code{as.bigz.bigq()} returns the smallest integers not less than the
   corresponding rationals bigq.
+
+  \code{NA_bigq_} is computed on package load time as \code{as.bigq(NA)}.
 }
 
 \author{Antoine Lucas}
@@ -86,6 +89,8 @@ stopifnot(is.bigq(x), is.bigq(x + y),
 # convert to string, double
 as.character(x)
 as.double(x)
+
+stopifnot( is.na(NA_bigq_) )
 
 # Depict the "S4-class" bigq, i.e., the formal (S4) methods:
 if(require("Rmpfr")) # mostly interesting there

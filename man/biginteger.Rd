@@ -8,6 +8,7 @@
 \alias{as.double.bigz}
 \alias{print.bigz}
 \alias{is.na.bigz}
+\alias{NA_bigz_}
 % these two are C symbols, will be removed eventually:
 \alias{biginteger_as}
 \alias{biginteger_as_character}
@@ -18,6 +19,7 @@
 }
 \usage{
 as.bigz(a, mod = NA)
+NA_bigz_
 \S3method{as.character}{bigz}(x, b = 10, \dots)
 % \S3method{as.double}{bigz}(x,\dots)
 is.bigz(x)
@@ -59,6 +61,8 @@ is.bigz(x)
 
   Comparison are supported, i.e., \code{"=="}, \code{"!="},
   \code{"<"}, \code{"<="}, \code{">"}, and \code{">="}.
+
+  \code{NA_bigz_} is computed on package load time as \code{as.bigz(NA)}.
 
   Objects of class \code{"bigz"} may have a \dQuote{modulus}, accessible
   via \code{\link{modulus}()}, currently as an attribute \code{mod}.
@@ -121,6 +125,7 @@ two <- as.bigz(2)
 p1 <- two^107 -1 ; isprime(p1); p1
 p2 <- two^127 -1 ; isprime(p2); p2
 
+stopifnot( is.na(NA_bigz_) )
 
 ## Calculate c = x^e mod n
 ## --------------------------------------------------------------------

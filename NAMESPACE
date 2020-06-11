@@ -43,6 +43,7 @@ export(
        "mod.bigz",
        "modulus", "modulus<-", # "modulus<-.bigz", "modulus.bigz",
        "mul.bigq", "mul.bigz",
+    NA_bigz_, NA_bigq_,
        "ncol.bigq", "ncol.bigz", "nrow.bigq", "nrow.bigz",
        "nextprime",
        "numerator", "numerator<-",
