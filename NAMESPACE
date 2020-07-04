@@ -18,6 +18,7 @@ export(
        ## "as.matrix.bigq", "as.matrix.bigz",
        ## this should be a deprecated use:
        "as.vector.bigq", "as.vector.bigz",
+       c_bigq, c_bigz,
        ## "c.bigq", "c.bigz", "cbind.bigq", "cbind.bigz",  "rbind.bigq", "rbind.bigz",
        ## "cumsum.bigq", "cumsum.bigz",
        "denominator", "denominator<-",

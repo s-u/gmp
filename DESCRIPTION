@@ -1,6 +1,6 @@
 Package: gmp
 Version: 0.6-1
-Date: 2020-06-10
+Date: 2020-07-04
 Title: Multiple Precision Arithmetic
 Author: Antoine Lucas, Immanuel Scholz, Rainer Boehme <rb-gmp@reflex-studio.de>,
   Sylvain Jasson <Sylvain.Jasson@inrae.fr>,
@@ -9,7 +9,7 @@ Maintainer: Antoine Lucas <antoinelucas@gmail.com>
 Description: Multiple Precision Arithmetic (big integers and rationals,
  prime number tests, matrix computation), "arithmetic without limitations"
  using the C library GMP (GNU Multiple Precision Arithmetic).
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.5.0)
 Imports: methods
 Suggests: Rmpfr, MASS
 SystemRequirements: gmp (>= 4.2.3)

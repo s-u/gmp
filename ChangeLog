@@ -1,3 +1,8 @@
+2020-06-12  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/biginteger.R (c_bigz): export, to be used, e.g.,
+	* R/bigq.R (c_bigq): on  lapply(<big>, Fn) to give a <big[qz]> result
+
 2020-06-09  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* DESCRIPTION (Version): 0.6-1

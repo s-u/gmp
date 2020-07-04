@@ -362,12 +362,16 @@ sum.bigz <- function(..., na.rm = FALSE)
 setMethod("which.max", "bigz", function(x) which.max(x == max(x)))
 setMethod("which.min", "bigz", function(x) which.max(x == min(x)))
 
+##' to be applied e.g. to the result of  lapply(<bigz>, Fn)
+c_bigz <- function(L) .Call(biginteger_c, L)
+
 c.bigz <- function(..., recursive = FALSE)
 {
     argL <- list(...)
     if(any(vapply(argL, inherits, NA, what="bigq")))
-        .Call(bigrational_c, argL)
-    else .Call(biginteger_c, argL)
+        c_bigq(argL)
+    else
+        c_bigz(argL)
 }
 
 ## This is practically identical to  grid :: rep.unit :

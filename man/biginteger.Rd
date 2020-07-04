@@ -9,6 +9,7 @@
 \alias{print.bigz}
 \alias{is.na.bigz}
 \alias{NA_bigz_}
+\alias{c_bigz}
 % these two are C symbols, will be removed eventually:
 \alias{biginteger_as}
 \alias{biginteger_as_character}
@@ -25,6 +26,7 @@ NA_bigz_
 is.bigz(x)
 \S3method{is.na}{bigz}(x)
 \S3method{print}{bigz}(x, quote=FALSE, initLine = is.null(modulus(x)), \dots)
+c_bigz(L)
 }
 \arguments{
   \item{a}{either \code{\link{integer}}, \code{\link{numeric}} (i.e.,
@@ -44,6 +46,10 @@ is.bigz(x)
     \bold{init}ial line (with the class and length or dimension) should
     be printed.  The default prints it for those cases where the class
     is not easily discernable from the print output.}
+  \item{L}{a \code{\link{list}} where each element contains \code{"bigz"}
+    numbers, for \code{c_bigz()}, this allows something like an
+    \code{\link{sapply}()} for \code{"bigz"} vectors, see \code{sapplyZ()}
+    in the examples.}
 }
 \value{
   An \R object of (S3) class \code{"bigz"}, representing the argument
@@ -163,6 +169,13 @@ as.character(c, b=16)
 # Depict the "S4-class" bigz, i.e., the formal (S4) methods:
 if(require("Rmpfr")) # mostly interesting there
   showMethods(class="bigz")
-}
 
+# an  sapply() version that works for big integers "bigz":
+sapplyZ <- function(X, FUN, ...) c_bigz(lapply(X, FUN, ...))
+
+# dummy example showing it works (here):
+zz <- as.bigz(3)^(1000+ 1:999)
+z1 <- sapplyZ(zz, function(z) z^2)
+stopifnot( identical(z1, zz^2) )
+}
 \keyword{arith}

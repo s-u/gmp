@@ -85,7 +85,7 @@ print.bigq <- function(x, quote = FALSE, initLine = TRUE, ...)
   invisible(x)
 }
 
-as.bigq <- function(n, d=1)
+as.bigq <- function(n, d = 1L)
 {
     .Call(bigrational_as, n, d)
 }
@@ -227,10 +227,10 @@ cumsum.bigq <- function(x) .Call(bigrational_cumsum, x)
 
 
 
+##' to be applied e.g. to the result of  lapply(<bigq>, Fn)
+c_bigq <- function(L) .Call(bigrational_c, L)
 
-c.bigq <- function(..., recursive = FALSE) {
-    .Call(bigrational_c, list(...))
-}
+c.bigq <- function(..., recursive = FALSE) c_bigq(list(...))
 
 ## This is practically identical to  grid :: rep.unit :
 rep.bigq <- function(x, times=1, length.out=NA, each=1, ...) {
