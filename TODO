@@ -1,6 +1,12 @@
 
 * Remove full path in `configure.ac` script, with example of Rmpfr configure.						-*-org-*-
 * Bug Fixes
+** TODO Logical ops should work: 0=FALSE NA=NA, <any_else>=TRUE
+*** !as.bigz(0:3)  crashes R badly (!!), but should return !(0:3) (logical vector).
+ terminate called after throwing an instance of 'std::length_error'
+  what():  vector::_M_default_append \\ ...R: line 141: 25400 Aborted (core dumped)
+***  as.bigz(0:3) | as.bigz(0) etc should return logical as with regular numbers in R
+** TODO `format()` currently works via as.character(.), particularly unsatisfying for bigz.
 ** TODO Not working column assignment :  A[,j] <- vec    does nothing, not warn, nothing -- but  A[i,] <- val  works ??
 ** TODO m <- matrix(1:6, 2); Z <- as.bigz(m); str(Z) fails because e.g. Z[5] fails, contrary m[5]
 ** TODO asNumeric(x) : the generic must get a "..." argument, so can use "rounding mode" in Rmpfr

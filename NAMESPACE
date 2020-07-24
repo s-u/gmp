@@ -56,6 +56,7 @@ export(
        ## "prod", "prod.default",
        "prod.bigq", "prod.bigz",
        "rep.bigq", "rep.bigz",
+    round0, roundQ, # (x, digits, round0)
        ## "sign.bigq", "sign.bigz",
        "sizeinbase",
        "solve.bigq", "solve.bigz",

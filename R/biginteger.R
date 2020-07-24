@@ -60,13 +60,14 @@ div.bigz <- function(e1, e2) {
 
 "%%.bigz" <- mod.bigz <- function(e1, e2) {
    if(inherits(e2, "bigq")) {
-       if(!all(is.whole(e2[is.finite(e2)])))
+       if(!all(is.whole.bigq(e2[is.finite(e2)])))
            e2 <- as.bigz(e2)
        else
            stop("In 'n %% d', d must be integer")
    }
    .Call(biginteger_mod, e1, e2)
 }
+.mod.bigz <- function(e1, e2) .Call(biginteger_mod, e1, e2)
 
 pow.bigz <- function(e1, e2,...) {
     if(inherits(e2, "bigq"))

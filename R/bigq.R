@@ -102,9 +102,9 @@ formatN.bigq	<- function(x, ...) {
     r
 }
 
-as.double.bigq<- function(x,...) .Call(bigrational_as_numeric, x)
+as.double.bigq <- function(x,...) .Call(bigrational_as_numeric, x)
 ## maybe sub-optimal, but at least "R-consistent" in warnings/errors...:
-as.integer.bigq<- function(x,...) as.integer(.Call(bigrational_as_numeric, x))
+as.integer.bigq <- function(x,...) as.integer(.Call(bigrational_as_numeric, x))
 
 .bigq2num <- function(x) {
     ## cat(".bigq2num():\n")
@@ -205,18 +205,33 @@ trunc.bigq <- function(x, ...) ## := sign(x) * floor(abs(x)) =
     sign.bigq(x) * as.bigz.bigq(abs.bigq(x))
 floor.bigq   <- function(x) as.bigz.bigq(x)
 ceiling.bigq <- function(x) -as.bigz.bigq(-x)
-round.bigq <- function(x, digits = 0) {
+
+if(FALSE) ## this was used in round.bigq() for several months in 2020:
+round0 <- function(x) as.bigz.bigq(x + as.bigq(1, 2))
+
+##' rounding to integer a la "nearbyint()" -- i.e. "round to even"
+round0 <- function(x) {
+    nU <- as.bigz.bigq(xU <- x + as.bigq(1, 2)) # traditional round: .5 rounded up
+    if(any(I <- is.whole.bigq(xU))) { # I <==>  x == <n>.5 : "hard case"
+        I[I] <- .mod.bigz(nU[I], 2L) == 1L # rounded up is odd  ==> round *down*
+        nU[I] <- nU[I] - 1L
+    }
+    nU
+}
+
+roundQ <- function(x, digits = 0, r0 = round0) {
     ## round(x * 10^d) / 10^d
-    bigq_half <- as.bigq(1, 2)
-    round0 <- function(x) as.bigz.bigq(x + bigq_half)
     stopifnot(length(digits) == 1L)
     if(digits == 0)
-        round0(x)
+        r0(x)
     else {
         p10 <- as.bigz(10) ^ digits # bigz iff digits >= 0,  bigq otherwise
-        round0(x * p10) / p10
+        r0(x * p10) / p10
     }
 }
+
+##' round() method ==> signature = (x, digits)  {round0 *not* allowed as argument}
+round.bigq <- function(x, digits = 0) roundQ(x, digits)
 
 cumsum.bigq <- function(x) .Call(bigrational_cumsum, x)
 ## TODO: add cummax(), cummin(), cumprod()
