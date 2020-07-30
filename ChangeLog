@@ -1,3 +1,8 @@
+2020-07-29  Martin Maechler  <maechler@stat.math.ethz.ch>
+
+	* R/bigq.R (roundQ): use simpler *vectorized* version;
+	* tests/arith-ex.R: check it works.
+
 2020-07-23  Martin Maechler  <maechler@stat.math.ethz.ch>
 
 	* R/bigq.R (round, round0, roundQ): round0(): "round to even"; make

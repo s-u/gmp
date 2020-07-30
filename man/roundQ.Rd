@@ -53,17 +53,17 @@ roundQ(x, digits = 0, r0 = round0)
 \examples{
 qq <- as.bigq((-21:31), 10)
 noquote(cbind(as.character(qq), asNumeric(qq)))
-round0(qq)
+round0(qq) # Big Integer ("bigz")
 ## corresponds to R's own "round to even" :
 stopifnot(round0(qq) == round(asNumeric(qq)))
+round(qq) # == round(qq, 0): the same as round0(qq) *but* Big Rational ("bigq")
 
 halfs <- as.bigq(1,2) + -5:12
 \dontshow{q <- c(halfs, qq)
-stopifnot(identical(round0(q),
-                    round (q, 0))) ;  rm(q)
+stopifnot(round0(q) == round(q)) ;  rm(q)
 }
 
-\dontshow{if(FALSE)}
+\dontshow{if(FALSE)}% do not create it in user's globalenv
 ## round0() is simply
 round0 <- function (x) {
     nU <- as.bigz.bigq(xU <- x + as.bigq(1, 2)) # traditional round: .5 rounded up
@@ -80,15 +80,11 @@ round0s <- function(x) as.bigz.bigq(x + as.bigq(1, 2))
 cbind(halfs, round0s(halfs), round0(halfs))
 
 \dontshow{if(FALSE)}
-## roundQ() is also just
+## roundQ() is simply
 roundQ <- function(x, digits = 0, r0 = round0) {
-    ## round(x * 10^d) / 10^d
-    if(digits == 0)
-        r0(x)
-    else {
-        p10 <- as.bigz(10) ^ digits  # bigz iff digits >= 0,  bigq otherwise
-        r0(x * p10) / p10
-    }
+    ## round(x * 10^d) / 10^d --  vectorizing in both (x, digits)
+    p10 <- as.bigz(10) ^ digits # class: if(all(digits >= 0)) "bigz" else "bigq"
+    r0(x * p10) / p10
 }
 }
 \keyword{arith}

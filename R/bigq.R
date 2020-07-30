@@ -220,14 +220,9 @@ round0 <- function(x) {
 }
 
 roundQ <- function(x, digits = 0, r0 = round0) {
-    ## round(x * 10^d) / 10^d
-    stopifnot(length(digits) == 1L)
-    if(digits == 0)
-        r0(x)
-    else {
-        p10 <- as.bigz(10) ^ digits # bigz iff digits >= 0,  bigq otherwise
-        r0(x * p10) / p10
-    }
+    ## round(x * 10^d) / 10^d --  vectorizing in both (x, digits)
+    p10 <- as.bigz(10) ^ digits # class: if(all(digits >= 0)) "bigz" else "bigq"
+    r0(x * p10) / p10
 }
 
 ##' round() method ==> signature = (x, digits)  {round0 *not* allowed as argument}

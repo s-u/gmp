@@ -1,6 +1,6 @@
 Package: gmp
 Version: 0.6-1
-Date: 2020-07-24
+Date: 2020-07-29
 Title: Multiple Precision Arithmetic
 Author: Antoine Lucas, Immanuel Scholz, Rainer Boehme <rb-gmp@reflex-studio.de>,
   Sylvain Jasson <Sylvain.Jasson@inrae.fr>,
