@@ -1,6 +1,7 @@
-2020-07-29  Martin Maechler  <maechler@stat.math.ethz.ch>
+2020-07-30  Martin Maechler  <maechler@stat.math.ethz.ch>
 
-	* R/bigq.R (roundQ): use simpler *vectorized* version;
+	* R/bigq.R (roundQ): use simpler *vectorized* version, always
+	returning 'bigq' (as documented).
 	* tests/arith-ex.R: check it works.
 
 2020-07-23  Martin Maechler  <maechler@stat.math.ethz.ch>
