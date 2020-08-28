@@ -118,7 +118,7 @@ c_bigz(L)
   }
 }
 
-\references{The GNU MP Library, see \url{http://gmplib.org}}
+\references{The GNU MP Library, see \url{https://gmplib.org}}
 \author{Immanuel Scholz}
 
 \examples{
