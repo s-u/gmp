@@ -9,11 +9,14 @@
 #include <gmp.h>
 
 
-
 #include <R.h>
+
+#define R_NO_REMAP   // avoid collisions with stl definitions such as length()
 #include <Rinternals.h>
+#ifndef AS_INTEGER
 // the only thing we use from <Rdefines.h> :
-#define AS_INTEGER(x) coerceVector(x,INTSXP)
+#define AS_INTEGER(x) Rf_coerceVector(x,INTSXP)
+#endif
 
 #define class_P(_x_) CHAR(Rf_asChar(Rf_getAttrib(_x_, R_ClassSymbol)))
 
