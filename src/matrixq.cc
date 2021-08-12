@@ -25,7 +25,6 @@ using namespace std;
 
 #include "bigrational.h"
 #include "bigrationalR.h"
-//#include "bigintegerR.h"
 #include "matrixq.h"
 
 

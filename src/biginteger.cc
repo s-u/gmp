@@ -11,10 +11,10 @@
  *  \note Licence: GPL (>= 2)
  */
 
-#include "biginteger.h"
-
-#include <stdio.h>
+#include <cstdio>
 #include <iostream>
+
+#include "biginteger.h"
 
 using std::string;
 

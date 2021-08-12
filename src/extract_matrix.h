@@ -19,12 +19,11 @@
 #ifndef EXTRACT_MATRIX_HEADER_GMP_R_
 #define EXTRACT_MATRIX_HEADER_GMP_R_ 1
 
-#include <R.h>
-#include <Rinternals.h>
 #include <functional>
+#include <algorithm>
+
 #include "bigvec_q.h"
 #include "bigintegerR.h"
-#include <algorithm>
 
 extern "C"
 {

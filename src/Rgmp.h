@@ -3,15 +3,14 @@
 
 // gmp.h calls cstddef with __need_size_t defined
 #include <cstddef>
-// and avoid the inclusion of stdlib.h
 #include <cstdlib>
 #include <cmath>
+
 #include <gmp.h>
 
 
 #include <R.h>
 
-#define R_NO_REMAP   // avoid collisions with stl definitions such as length()
 #include <Rinternals.h>
 #ifndef AS_INTEGER
 // the only thing we use from <Rdefines.h> :

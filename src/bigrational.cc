@@ -12,10 +12,10 @@
  *  \note Licence: GPL (>= 2)
  */
 
+#include <cstdio>
+
 #include "bigrational.h"
 #include "bigrationalR.h"
-
-#include <stdio.h>
 
 using std::string;
 

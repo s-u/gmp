@@ -20,9 +20,6 @@
 
 using namespace std;
 
-#include "Rgmp.h"
-
-#include "biginteger.h"
 #include "bigintegerR.h"
 #include "matrix.h"
 // need to call matrix_mul_q()
