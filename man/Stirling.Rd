@@ -82,6 +82,7 @@ Eulerian.all (n)
 \examples{
 Stirling1(7,2)
 Stirling2(7,3)
+Stirling2(50,10)
 
 stopifnot(
  Stirling1.all(9) == c(40320, -109584, 118124, -67284, 22449, -4536, 546, -36, 1)
