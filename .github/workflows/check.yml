@@ -18,7 +18,7 @@ jobs:
 
       - uses: s-u/R-actions/pkg-check@master
         with:
-          debian-deps: libgmp-dev
-          macos-deps: gmp-6.2.1
+          debian-deps: libgmp-dev libmpfr-dev
+          macos-deps: gmp-6.2.1 mpfr-4.0.2
           check-flags: --as-cran
 
