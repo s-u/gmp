@@ -22,3 +22,11 @@ jobs:
           macos-deps: gmp-6.2.1 mpfr-4.0.2
           check-flags: --as-cran
 
+      - name: test gmp
+        shell: bash
+        run: |
+          ## test this binary
+          R -e "S <- gmp::Stirling2(50,10)"
+          ## test CRAN binary
+          R -e "install.packages('gmp', repos = 'https://mac.r-project.org')"
+          R -e "S <- gmp::Stirling2(50,10)"
