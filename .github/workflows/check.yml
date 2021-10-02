@@ -1,0 +1,24 @@
+on: [push, pull_request]
+
+name: Check
+
+jobs:
+  R-CMD-check:
+    runs-on: ${{ matrix.os }}
+
+    name: ${{ matrix.os }} check
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ 'windows-latest', 'macOS-10.15', 'ubuntu-20.04' ]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: s-u/R-actions/pkg-check@master
+        with:
+          debian-deps: libgmp-dev
+          macos-deps: gmp-6.2.1
+          check-flags: --as-cran
+
