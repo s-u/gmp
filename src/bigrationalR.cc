@@ -40,7 +40,7 @@ namespace bigrationalR
 	// deserialise the vector. first int is the size.
 	bigvec_q v;
 	char* raw = (char*)RAW(param);
-	int pos = sizeof(int); // position in raw[]. Starting after header.
+	size_t pos = sizeof(int); // position in raw[]. Starting after header.
 	for (int i = 0; i < ((int*)raw)[0]; ++i) {
 	  v.push_back(bigrational(bigrational((void*)&raw[pos])));
 	  pos += v.value.back().raw_size(); // increment number of bytes read.
@@ -142,8 +142,8 @@ namespace bigrationalR
   {
 
     SEXP ans, R_denom;
-    int sizenum = sizeof(int), // starting with vector-size-header
-	sizedenum = sizenum;
+    size_t sizenum = sizeof(int), // starting with vector-size-header
+	   sizedenum = sizenum;
     unsigned int i;
     mpz_t  num, den;
 
@@ -179,8 +179,8 @@ namespace bigrationalR
     char* r = (char*)RAW(ans);
     char* rdenom = (char*)RAW(R_denom);
     ((int*)r)[0] =((int*)rdenom)[0] = v.size(); // first int is vector-size-header
-    int posnum = sizeof(int); // current position in r[] (starting after vector-size-header)
-    int posdenum = sizeof(int); // current position in r[] (starting after vector-size-header)
+    size_t posnum = sizeof(int); // current position in r[] (starting after vector-size-header)
+    size_t posdenum = sizeof(int); // current position in r[] (starting after vector-size-header)
     for (i = 0; i < v.size(); ++i)
       {
 	mpq_get_num(num,v[i].getValueTemp());

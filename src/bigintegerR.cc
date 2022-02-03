@@ -45,7 +45,7 @@ namespace bigintegerR
 	// deserialise the vector. first int is the size.
 	bigvec v;
 	const char* raw = (char*)RAW(param);
-	int pos = sizeof(int); // position in raw[]. Starting after header.
+	size_t pos = sizeof(int); // position in raw[]. Starting after header.
 	int sizevec = ((int*)raw)[0];
 	//std::cout << "nb element a lire " << sizevec << std::endl;
 	v.value.resize(sizevec);
@@ -176,14 +176,14 @@ namespace bigintegerR
   SEXP create_SEXP(const std::vector<biginteger>& v)
   {
     unsigned int i;
-    int size = sizeof(int); // starting with vector-size-header
+    size_t size = sizeof(int); // starting with vector-size-header
     for (i = 0; i < v.size(); ++i)
       size += v[i].raw_size(); // adding each bigint's needed size
     SEXP ans = PROTECT(Rf_allocVector(RAWSXP, size));
     // Rprintf("    o create_SEXP(vect<biginteger>): size=%d, v.size()=%d\n", size, v.size());
     char* r = (char*)(RAW(ans));
     ((int*)(r))[0] = v.size(); // first int is vector-size-header
-    int pos = sizeof(int); // current position in r[] (starting after vector-size-header)
+    size_t pos = sizeof(int); // current position in r[] (starting after vector-size-header)
     for (i = 0; i < v.size(); ++i)
       pos += v[i].as_raw(&r[pos]);
     UNPROTECT(1);
