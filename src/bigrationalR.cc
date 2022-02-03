@@ -40,7 +40,7 @@ namespace bigrationalR
 	// deserialise the vector. first int is the size.
 	bigvec_q v;
 	char* raw = (char*)RAW(param);
-	int pos = sizeof(int); // position in raw[]. Starting after header.
+	size_t pos = sizeof(int); // position in raw[]. Starting after header.
 	for (int i = 0; i < ((int*)raw)[0]; ++i) {
 	  v.push_back(bigrational(bigrational((void*)&raw[pos])));
 	  pos += v.value.back().raw_size(); // increment number of bytes read.

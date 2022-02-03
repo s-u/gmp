@@ -45,7 +45,7 @@ namespace bigintegerR
 	// deserialise the vector. first int is the size.
 	bigvec v;
 	const char* raw = (char*)RAW(param);
-	int pos = sizeof(int); // position in raw[]. Starting after header.
+	size_t pos = sizeof(int); // position in raw[]. Starting after header.
 	int sizevec = ((int*)raw)[0];
 	//std::cout << "nb element a lire " << sizevec << std::endl;
 	v.value.resize(sizevec);
